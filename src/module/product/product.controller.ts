@@ -20,8 +20,7 @@ const createProduct = async(req:Request,res:Response)=>{
           createdAt: product.createdAt,
           updatedAt: product.updatedAt,
         };
-    res.json({
-       
+    res.json({       
         message:"Product created Successfully!!!",
         success:true,
         data:formattedProduct
@@ -54,13 +53,35 @@ const createProduct = async(req:Request,res:Response)=>{
 
 const getAllProducts = async(req:Request,res:Response)=>{
 try {
-    const result = await productService.getAllProducts();
-    res.send({
-        status:true,
-        message:"All Products are retrieved Successfully!!!",
-        data:result
+    // const result = await productService.getAllProducts();
+    // res.send({
+    //     status:true,
+    //     message:"All Products are retrieved Successfully!!!",
+    //     data:result
 
-    })
+    // })
+    const products = await productService.getAllProducts();
+
+    // Format the products data
+    const formattedProducts = products.map((product: any) => ({
+      _id: product._id,
+      name: product.name,
+      brand: product.brand,
+      price: product.price,
+      category: product.category,
+      description: product.description,
+      quantity: product.quantity,
+      inStock: product.inStock,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
+    }));
+
+    // Send the formatted response
+    res.status(200).json({
+      message: "Products retrieved successfully",
+      status: true,
+      data: formattedProducts,
+    });
 } 
 catch (error: any) {
     if (error.name === "ValidationError") {
@@ -91,19 +112,30 @@ const getSingleProduct = async(req:Request,res:Response)=>{
     try {
         const productId = req.params.productId
         const result = await productService.getSingleProduct(productId);
-        res.send({
-            status:true,
-            message:"Product is retrieved Successfully!!!",
-            data:result
-    
-        })
-    } catch (error) {
-        res.json({
-            status:false,
-            message:'Something went wrong',
-            error
-        })
-    }
+        if (!result) {
+            return res.status(404).json({
+              message: "Product not found",
+              status: false,
+            });
+          }
+  
+          res.status(200).json({
+            message: "Product retrieved successfully",
+            status: true,
+            data: result,
+          });
+    } 
+    catch (error: any) {
+        res.status(500).json({
+          message: "Something went wrong",
+          status: false,
+          error: {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          },
+        });
+      }
     }
 
     const updateProduct = async(req:Request,res:Response)=>{
@@ -112,8 +144,9 @@ const getSingleProduct = async(req:Request,res:Response)=>{
             const body = req.body
             const result = await productService.updateProduct(productId,body);
             res.send({
-                status:true,
+                
                 message:"Product is updated Successfully!!!",
+                status:true,
                 data:result
         
             })
