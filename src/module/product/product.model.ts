@@ -1,4 +1,4 @@
-import { Schema } from "mongoose"
+import { model, Schema } from "mongoose"
 import { IProduct } from "./product.interface"
 
 
@@ -37,5 +37,11 @@ const productSchema = new Schema<IProduct>({
         required:true
        }
      
-     } 
+     } ,
+     { 
+        timestamps: true,
+        versionKey: false
+    }
  )
+
+ export const Product = model<IProduct>('Product',productSchema)

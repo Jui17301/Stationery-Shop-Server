@@ -1,5 +1,8 @@
 
 export interface IProduct {
+    _id: any
+    updatedAt: any
+    createdAt: any
     name: string // Typescript type
     brand: string
     price: number
