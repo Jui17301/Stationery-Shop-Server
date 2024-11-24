@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prettier": "prettier . --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,12 +18,20 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongodb": "^6.11.0",
-    "mongoose": "^8.8.2"
+    "mongoose": "^8.8.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
+    "@types/node": "^22.9.3",
+    "eslint": "^9.14.0",
+    "globals": "^15.12.0",
     "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.15.0"
   }
 }

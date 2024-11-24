@@ -1,10 +1,11 @@
-import { Types } from "mongoose"
-
+import { Types } from 'mongoose';
 
 export interface IOrder {
-    email: string 
-    product:Types.ObjectId
-    quantity:number
-    totalPrice: number
-   
-  }
+  id: string;
+  email: string;
+  product: Types.ObjectId;
+  quantity: number;
+  totalPrice: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
