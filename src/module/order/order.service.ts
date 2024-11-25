@@ -5,10 +5,7 @@ import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrder = async (orderData: IOrder) => {
-  // const result = await Order.create(payload);
-  // return result;
-
-  // const { productId, quantity } = orderData;
+  
   // find productId for referencing product:
   const product = await productService.getSingleProduct(orderData.product);
   //product available in product module??
