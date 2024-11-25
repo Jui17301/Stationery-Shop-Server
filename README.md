@@ -64,7 +64,7 @@ Clone the repository:
 
 ```
 https://github.com/Jui17301/Stationery-Shop-Server.git
-cd Stationery-Shop
+cd Stationery-Shop-Server
 ```
 
 ## Install dependencies:
