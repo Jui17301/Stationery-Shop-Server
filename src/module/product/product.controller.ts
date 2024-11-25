@@ -25,7 +25,7 @@ const createProduct = async (req: Request, res: Response) => {
       success: true,
       data: formattedProduct,
     });
-  } catch (error:any) {
+  } catch (error: any) {
     if (error.name === 'ValidationError') {
       res.status(400).json({
         message: 'Validation failed',
@@ -52,7 +52,7 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const {searchTerm}=req.query;
+    const { searchTerm } = req.query;
     const products = await productService.getAllProducts(searchTerm as string);
     const formattedProducts = products.map((product) => ({
       id: product.id,
@@ -71,7 +71,7 @@ const getAllProducts = async (req: Request, res: Response) => {
       status: true,
       data: formattedProducts,
     });
-  } catch (error:any) {
+  } catch (error: any) {
     if (error.name === 'ValidationError') {
       res.status(400).json({
         message: 'Validation failed',
@@ -112,7 +112,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
       status: true,
       data: result,
     });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({
       message: 'Something went wrong',
       status: false,
@@ -147,7 +147,7 @@ const updateProduct = async (req: Request, res: Response) => {
 const deleteProduct = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
-    const result = await productService.deleteProduct(productId);
+    await productService.deleteProduct(productId);
     res.send({
       status: true,
       message: 'Product deleted Successfully',

@@ -6,16 +6,12 @@ const createProduct = async (payload: IProduct): Promise<IProduct> => {
   return result;
 };
 
-const getAllProducts = async (searchTerm:string) => {
-  let filter ={};
+const getAllProducts = async (searchTerm: string) => {
+  let filter = {};
   if (searchTerm) {
     const regex = new RegExp(searchTerm, 'i'); // Case-insensitive regex
     filter = {
-      $or: [
-        { name: regex },
-        { brand: regex },
-        { category: regex },
-      ],
+      $or: [{ name: regex }, { brand: regex }, { category: regex }],
     };
   }
   const result = await Product.find(filter);

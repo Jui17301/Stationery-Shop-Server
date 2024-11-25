@@ -11,8 +11,8 @@ app.use(express.json());
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to Stationery Shop!");
-  });
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to Stationery Shop!');
+});
 
 export default app;

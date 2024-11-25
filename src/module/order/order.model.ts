@@ -8,7 +8,7 @@ const orderSchema = new Schema<IOrder>(
       required: true,
     },
     product: {
-      type:String,
+      type: String,
       required: true,
     },
     quantity: {
