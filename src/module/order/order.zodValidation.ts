@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const orderValidationSchema = z.object({
-  // id: z.string().min(1, "ID is required"),
+  // _id: z.string().min(1, "ID is required"),
   email: z.string()
   .email({ message: 'Invalid email address' }),
 

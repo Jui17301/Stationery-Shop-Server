@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { OrderController } from './order.controller';
 
 
-export const orderRouter = Router();
+const orderRouter = Router();
 
 orderRouter.post('/',OrderController.createOrder);
-// orderRouter.get('/revenue',OrderController.);
+orderRouter.get('/revenue',OrderController.calculateRevenue);
 
 export default orderRouter;
