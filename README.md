@@ -63,7 +63,7 @@ Develop a TypeScript-based Express application integrated with MongoDB and Mongo
 Clone the repository:
 
 ```
-https://stationery-shop-server-red.vercel.app/
+https://github.com/Jui17301/Stationery-Shop-Server.git
 cd Stationery-Shop
 ```
 
