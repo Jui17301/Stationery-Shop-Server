@@ -19,7 +19,7 @@ const createOrder = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Something went wrong',
       success: false,
-      error: error.message || 'Internal server error',
+      error: error || 'Internal server error',
     });
   }
 };
@@ -35,7 +35,7 @@ const calculateRevenue = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Something went wrong',
       success: false,
-      error: error.message || 'Internal server error',
+      error: error || 'Internal server error',
     });
   }
 };
