@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { productService } from './product.service';
 import { productValidationSchema } from './product.zodValidation';
@@ -8,7 +9,7 @@ const createProduct = async (req: Request, res: Response) => {
     const zodParsedDate = productValidationSchema.parse(payload);
     const product = await productService.createProduct(zodParsedDate);
     const formattedProduct = {
-      id: product.id,
+      _id: product._id,
       name: product.name,
       brand: product.brand,
       price: product.price,
@@ -20,7 +21,7 @@ const createProduct = async (req: Request, res: Response) => {
       updatedAt: product.updatedAt,
     };
     res.json({
-      message: 'Product created Successfully!!!',
+      message: 'Product created Successfully',
       success: true,
       data: formattedProduct,
     });
@@ -51,7 +52,8 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const products = await productService.getAllProducts();
+    const {searchTerm}=req.query;
+    const products = await productService.getAllProducts(searchTerm as string);
     const formattedProducts = products.map((product) => ({
       id: product.id,
       name: product.name,
@@ -148,7 +150,7 @@ const deleteProduct = async (req: Request, res: Response) => {
     const result = await productService.deleteProduct(productId);
     res.send({
       status: true,
-      message: 'Product is deleted Successfully!!!',
+      message: 'Product deleted Successfully',
       data: {},
     });
   } catch (error) {

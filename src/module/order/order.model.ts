@@ -3,11 +3,11 @@ import { IOrder } from './order.interface';
 
 const orderSchema = new Schema<IOrder>(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    // id: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    // },
     email: {
       type: String,
       required: true,

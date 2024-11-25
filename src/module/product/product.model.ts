@@ -4,11 +4,6 @@ import { IProduct } from './product.interface';
 const productSchema = new Schema<IProduct>(
   
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     name: {
       type: String,
       required: [true, 'Please enter product name'],
