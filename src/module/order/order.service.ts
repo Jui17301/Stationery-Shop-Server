@@ -1,36 +1,26 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import { productService } from '../product/product.service';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrder = async (orderData: IOrder) => {
-  
-  // find productId for referencing product:
+
   const product = await productService.getSingleProduct(orderData.product);
-  //product available in product module??
   if (!product) {
     throw new Error('Product not found');
   }
-  // Check quantity
   if (orderData.quantity > product.quantity) {
     throw new Error('Insufficient stock available');
   }
-
-  // count available quantity
+  //Business logic-1
   product.quantity = product.quantity - orderData.quantity;
-
-  // Update the inStock status if quantity becomes 0
+  //BusinessLogic -2
   if (product.quantity === 0) {
     product.inStock = false;
   }
-
-  // Save the updated product to the database
+  //updated data save to the DB
   await product.save();
 
-  // Create the order
   const newOrder = new Order({
-    // _id:orderData._id,
     email: orderData.email,
     product: orderData.product,
     quantity: orderData.quantity,

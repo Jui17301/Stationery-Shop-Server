@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Request, Response } from 'express';
 
 import { orderValidationSchema } from './order.zodValidation';

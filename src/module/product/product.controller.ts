@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { productService } from './product.service';
 import { productValidationSchema } from './product.zodValidation';
 
-const createProduct = async (req: Request, res: Response):Promise<void> => {
+const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const payload = req.body;
     const zodParsedDate = productValidationSchema.parse(payload);
@@ -50,7 +50,7 @@ const createProduct = async (req: Request, res: Response):Promise<void> => {
   }
 };
 
-const getAllProducts = async (req: Request, res: Response):Promise<void> => {
+const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const { searchTerm } = req.query;
     const products = await productService.getAllProducts(searchTerm as string);
@@ -96,12 +96,12 @@ const getAllProducts = async (req: Request, res: Response):Promise<void> => {
   }
 };
 
-const getSingleProduct = async (req: Request, res: Response):Promise<void> => {
+const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const productId = req.params.productId;
     const result = await productService.getSingleProduct(productId);
     if (!result) {
-       res.status(404).json({
+      res.status(404).json({
         message: 'Product not found',
         status: false,
       });
@@ -125,13 +125,13 @@ const getSingleProduct = async (req: Request, res: Response):Promise<void> => {
   }
 };
 
-const updateProduct = async (req: Request, res: Response):Promise<void> => {
+const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const productId = req.params.productId;
     const body = req.body;
     const result = await productService.updateProduct(productId, body);
     res.send({
-      message: 'Product is updated Successfully!!!',
+      message: 'Product updated Successfully!!!',
       status: true,
       data: result,
     });
@@ -144,13 +144,13 @@ const updateProduct = async (req: Request, res: Response):Promise<void> => {
   }
 };
 
-const deleteProduct = async (req: Request, res: Response):Promise<void> => {
+const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const productId = req.params.productId;
     await productService.deleteProduct(productId);
-    res.send({
-      status: true,
+    res.send({     
       message: 'Product deleted Successfully',
+      status: true,
       data: {},
     });
   } catch (error) {
