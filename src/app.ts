@@ -15,4 +15,12 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to Stationery Shop!');
 });
 
+// Route not found is not an error , it is an statement same as API NOT FOUND
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    status: false,
+    message: 'Route not found',
+  });
+});
+
 export default app;
