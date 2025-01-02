@@ -40,7 +40,7 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
       res.status(500).json({
         message: 'Something went wrong',
         success: false,
-        error: {
+        errors: {
           name: error.name || 'Error',
           message: error.message || 'An unexpected error occurred',
         },
