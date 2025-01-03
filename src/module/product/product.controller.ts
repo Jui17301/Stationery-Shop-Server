@@ -32,14 +32,12 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
         message: 'Validation failed',
         success: false,
         error: formatErrorResponse(error),
-      stack: error.stack as string
       });
     } else {
       res.status(500).json({
         message: 'Something went wrong',
         success: false,
         error: formatErrorResponse(error),
-        stack: error.stack,
       });
     }
   }
@@ -72,14 +70,12 @@ const getAllProducts = async (req: Request, res: Response): Promise<void> => {
         message: 'Validation failed',
         success: false,
         error: formatErrorResponse(error),
-        stack: error.stack,
       });
     } else {
       res.status(500).json({
         message: 'Something went wrong',
         success: false,
         error: formatErrorResponse(error),
-        stack: error.stack,
       });
     }
   }
@@ -106,7 +102,6 @@ const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
       message: 'Something went wrong',
       status: false,
       error: formatErrorResponse(error),
-        stack: error.stack,
     });
   }
 };
@@ -126,7 +121,6 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
       status: false,
       message: 'Something went wrong',
       error: formatErrorResponse(error),
-      stack: error
     });
   }
 };
@@ -135,7 +129,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const productId = req.params.productId;
     await productService.deleteProduct(productId);
-    res.send({     
+    res.send({
       message: 'Product deleted Successfully',
       status: true,
       data: {},
@@ -145,7 +139,6 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
       status: false,
       message: 'Something went wrong',
       error: formatErrorResponse(error),
-      stack:error
     });
   }
 };

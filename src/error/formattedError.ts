@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const formatErrorResponse = (error: any): object => {
   const response: any = {
     message:

@@ -3,7 +3,6 @@ import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrder = async (orderData: IOrder) => {
-
   const product = await productService.getSingleProduct(orderData.product);
   if (!product) {
     throw new Error('Product not found');

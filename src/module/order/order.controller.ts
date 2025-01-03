@@ -20,7 +20,6 @@ const createOrder = async (req: Request, res: Response) => {
       message: 'Something went wrong',
       success: false,
       error: formatErrorResponse(error),
-      stack:error
     });
   }
 };
@@ -37,7 +36,6 @@ const calculateRevenue = async (req: Request, res: Response) => {
       message: 'Something went wrong',
       success: false,
       error: formatErrorResponse(error),
-      stack:error
     });
   }
 };
