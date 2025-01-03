@@ -2,6 +2,7 @@
 import { Request, Response } from 'express';
 import { productService } from './product.service';
 import { productValidationSchema } from './product.zodValidation';
+import { formatErrorResponse } from '../../error/formattedError';
 
 const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -30,20 +31,14 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({
         message: 'Validation failed',
         success: false,
-        error: {
-          name: error.name,
-          errors: error.errors,
-        },
-        stack: error.stack,
+        error: formatErrorResponse(error),
+      stack: error.stack as string
       });
     } else {
       res.status(500).json({
         message: 'Something went wrong',
         success: false,
-        errors: {
-          name: error.name || 'Error',
-          message: error.message || 'An unexpected error occurred',
-        },
+        error: formatErrorResponse(error),
         stack: error.stack,
       });
     }
@@ -76,20 +71,14 @@ const getAllProducts = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({
         message: 'Validation failed',
         success: false,
-        error: {
-          name: error.name,
-          errors: error.errors,
-        },
+        error: formatErrorResponse(error),
         stack: error.stack,
       });
     } else {
       res.status(500).json({
         message: 'Something went wrong',
         success: false,
-        error: {
-          name: error.name || 'Error',
-          message: error.message || 'An unexpected error occurred',
-        },
+        error: formatErrorResponse(error),
         stack: error.stack,
       });
     }
@@ -116,11 +105,8 @@ const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({
       message: 'Something went wrong',
       status: false,
-      error: {
-        name: error.name,
-        message: error.message,
+      error: formatErrorResponse(error),
         stack: error.stack,
-      },
     });
   }
 };
@@ -139,7 +125,8 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
     res.json({
       status: false,
       message: 'Something went wrong',
-      error,
+      error: formatErrorResponse(error),
+      stack: error
     });
   }
 };
@@ -157,7 +144,8 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     res.json({
       status: false,
       message: 'Something went wrong',
-      error,
+      error: formatErrorResponse(error),
+      stack:error
     });
   }
 };

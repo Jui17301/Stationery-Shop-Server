@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { orderValidationSchema } from './order.zodValidation';
 import { orderService } from './order.service';
+import { formatErrorResponse } from '../../error/formattedError';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -18,7 +19,8 @@ const createOrder = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Something went wrong',
       success: false,
-      error: error || 'Internal server error',
+      error: formatErrorResponse(error),
+      stack:error
     });
   }
 };
@@ -34,7 +36,8 @@ const calculateRevenue = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Something went wrong',
       success: false,
-      error: error || 'Internal server error',
+      error: formatErrorResponse(error),
+      stack:error
     });
   }
 };
